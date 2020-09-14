@@ -37,7 +37,6 @@ const Search = (
               onSubmitEditing={() => handleOnClickSearchMovies()}
             />
             <Button title='Rechercher' onPress={() => handleOnClickSearchMovies()}/>
-            <Text>je veux1: {moviesSearchValue}</Text>
         </View>
     )
 }

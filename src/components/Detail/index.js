@@ -1,15 +1,29 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image } from 'react-native'
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  ActivityIndicator, 
+  ScrollView, 
+  Image, 
+  Button, 
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import moment from 'moment'
-import numeral from 'numeral'
+import moment from 'moment';
+import numeral from 'numeral';
 
 import { getImageFromApi } from '../../services/TMDBApi';
+
+import { HeartIcon } from '../../selectors/icons';
 
 const FilmDetail = ({
   moviesSearchResults,
   movieInfo,
   getMovieInfo,
+  favoriteMovies,
+  toggleFavorite,
 }) => {
 
 
@@ -18,7 +32,33 @@ const FilmDetail = ({
 
   useEffect(() => {
     getMovieInfo(route.params.movieId)
+    console.log('toto', favoriteMovies)
   }, [])
+
+  const handleOnPressToggleFavorite = () => {
+    console.log('handleOnPressToggleFavorite', movieInfo)
+   toggleFavorite(movieInfo.id); 
+  }
+
+const displayFavoriteImage = () => {
+  const size = '40';
+  var colorFill = 'none';
+  var stroke = 'blue';
+  if (favoriteMovies.findIndex(item => item === movieInfo.id) !== -1) {
+    // Film dans nos favoris
+    colorFill = 'red';
+    stroke = 'red';
+  }
+  return (
+    <View>
+    <HeartIcon 
+    colorFill={colorFill} 
+    stroke={stroke}
+    size={size}
+    />
+    </View>
+  )
+}
 
     return (
       <>
@@ -29,6 +69,11 @@ const FilmDetail = ({
               source={{uri: getImageFromApi(movieInfo.backdrop_path)}}
             />
             <Text style={styles.title_text}>{movieInfo.title}</Text>
+            <TouchableOpacity
+              style={styles.favorite_container}
+              onPress={() => handleOnPressToggleFavorite()}>
+              {displayFavoriteImage()}
+            </TouchableOpacity>
             <Text style={styles.description_text}>{movieInfo.overview}</Text>
             <Text style={styles.default_text}>Sorti le {moment(new Date(movieInfo.release_date)).format('DD/MM/YYYY')}</Text>
             <Text style={styles.default_text}>Note : {movieInfo.vote_average} / 10</Text>
@@ -79,6 +124,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: '#000000',
     textAlign: 'center'
+  },
+  favorite_container: {
+    alignItems: 'center',
   },
   description_text: {
     fontStyle: 'italic',

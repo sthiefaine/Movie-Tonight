@@ -3,7 +3,12 @@ import { StyleSheet, SafeAreaView, FlatList, Text} from 'react-native'
 
 import Cards from '../Cards'
 
-const List = ({getMoviesSearch, moviesSearchResults}) => {
+const List = ({
+    getMoviesSearch, 
+    moviesSearchResults,
+    favoriteMovies,
+    toggleFavorite,
+}) => {
 
     const paginationValue = moviesSearchResults.moviesActualPage; 
     const paginationNextValue = paginationValue + 1;
@@ -26,8 +31,18 @@ const List = ({getMoviesSearch, moviesSearchResults}) => {
                 <SafeAreaView style={styles.list_container}>
                     <FlatList
                     data={moviesSearchResults.moviesList}
+                    extraData={
+                        favoriteMovies,
+                        toggleFavorite
+                    }
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({item}) => <Cards data={item} />}
+                    renderItem={
+                        ({item}) => <Cards 
+                            movieInfo={item} 
+                            favoriteMovies={favoriteMovies}
+                            toggleFavorite={toggleFavorite}
+                        />
+                    }
                     onEndReachedThreshold={0.5}
                     onEndReached={handleOnScrollSearchMovies}
                     />

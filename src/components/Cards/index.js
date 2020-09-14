@@ -4,7 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 
 import { getImageFromApi } from '../../services/TMDBApi'
 
-const Cards = ({data}) => {
+import { HeartIcon } from '../../selectors/icons';
+
+import moment from 'moment';
+const Cards = ({
+  movieInfo, 
+  favoriteMovies,
+  toggleFavorite,
+}) => {
 
   const navigation = useNavigation();
 
@@ -19,26 +26,58 @@ const Cards = ({data}) => {
     }); 
   }
 
+  const displayFavoriteImage = () => {
+    const size = '20';
+    var colorFill = 'none';
+    var stroke = 'blue';
+    if (favoriteMovies.findIndex(item => item === movieInfo.id) !== -1) {
+      // Film dans nos favoris
+      colorFill = 'red';
+      stroke = 'red';
+    }
+    return (
+      <View>
+      <HeartIcon 
+      colorFill={colorFill} 
+      stroke={stroke}
+      size={size}
+      />
+      </View>
+    )
+  }
+
+  const handleOnPressToggleFavorite = () => {
+    console.log('handleOnPressToggleFavorite Cards', movieInfo)
+   toggleFavorite(movieInfo.id); 
+  }
+
     return (
         <TouchableOpacity 
           style={styles.main_container}
-          onPress={() => handleOnPressDetailForMovie(data.id)}
+          onPress={() => handleOnPressDetailForMovie(movieInfo.id)}
         >
             <Image
                 style={styles.image}
-                source={{uri: getImageFromApi(data.poster_path)}}
+                source={{uri: getImageFromApi(movieInfo.poster_path)}}
             />
             <View style={styles.content_container}>
                 <View style={styles.header_container}>
-                    <Text style={styles.title_text}>{data.title}</Text>
-                    <Text style={styles.vote_text}>{data.vote_average}</Text>
+                
+                    <Text style={styles.title_text}>{movieInfo.title}</Text>
+                    <Text style={styles.vote_text}>{movieInfo.vote_average}</Text>
                 </View>
                 <View style={styles.description_container}>
-                    <Text style={styles.description_text} numberOfLines={6}>{data.overview}</Text>
+                    <Text style={styles.description_text} numberOfLines={6}>{movieInfo.overview}</Text>
                 {/* La propriété numberOfLines permet de couper un texte si celui-ci est trop long, il suffit de définir un nombre maximum de ligne */}
                 </View>
                 <View style={styles.date_container}>
-                <Text style={styles.date_text}>Api</Text>
+                <Text style={styles.date_text}>{moment(new Date(movieInfo.release_date)).format('DD/MM/YYYY')}</Text>
+                <TouchableOpacity
+                  style={styles.favorite_container}
+                  onPress={() => handleOnPressToggleFavorite()}
+                >
+                  {displayFavoriteImage()}
+                </TouchableOpacity>
                 </View>
             </View>
         </TouchableOpacity>
@@ -84,11 +123,14 @@ const styles = StyleSheet.create({
         color: '#666666'
       },
       date_container: {
-        flex: 1
+        flexDirection: 'row-reverse',
       },
       date_text: {
         textAlign: 'right',
         fontSize: 14
+      },
+      favorite_container: {
+        flex: 1,
       },
   })
 

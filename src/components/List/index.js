@@ -23,7 +23,7 @@ const List = ({getMoviesSearch, moviesSearchResults}) => {
     return (
         <>
             {moviesSearchResults?.moviesNbResults && (
-                <SafeAreaView>
+                <SafeAreaView style={styles.list_container}>
                     <FlatList
                     data={moviesSearchResults.moviesList}
                     keyExtractor={item => item.id.toString()}
@@ -36,5 +36,11 @@ const List = ({getMoviesSearch, moviesSearchResults}) => {
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    list_container: {
+      flex: 1
+    },
+});
 
 export default List;

@@ -1,12 +1,29 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { getImageFromApi } from '../../services/TMDBApi'
 
 const Cards = ({data}) => {
 
+  const navigation = useNavigation();
+
+  const handleOnPressDetailForMovie = (movieId)  => {
+    console.log('handleOnPressDetailForFilm', movieId)
+    /**
+     * @param : route Name
+     * @param2: Object into params
+     */
+    navigation.navigate('Details', {
+      movieId: movieId,
+    }); 
+  }
+
     return (
-        <View style={styles.main_container}>
+        <TouchableOpacity 
+          style={styles.main_container}
+          onPress={() => handleOnPressDetailForMovie(data.id)}
+        >
             <Image
                 style={styles.image}
                 source={{uri: getImageFromApi(data.poster_path)}}
@@ -24,7 +41,7 @@ const Cards = ({data}) => {
                 <Text style={styles.date_text}>Api</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

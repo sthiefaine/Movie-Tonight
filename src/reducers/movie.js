@@ -2,6 +2,7 @@ import {
     SET_MOVIES_SEARCH_VALUE,
     SAVE_MOVIES_SEARCH_LIST,
     CLEAN_MOVIES_SEARCH,
+    SAVE_MOVIE_INFO,
   } from '../actions/movie';
   
   export const initialState = {
@@ -9,7 +10,7 @@ import {
     moviesSearchResults: {
       moviesList: [],
     },
-
+    movieInfo: '',
   };
   
   const movie = (state = initialState, action = {}) => {
@@ -39,7 +40,14 @@ import {
                 ...action.value.results],
             }
           }
+        };
+        case SAVE_MOVIE_INFO: {
+          return {
+            ...state,
+            movieInfo: action.value,
+          }
         }
+
       default:
         return state;
     }

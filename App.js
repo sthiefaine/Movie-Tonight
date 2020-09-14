@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import SearchNav from './src/navigations/Search';
-import FilmDetail from './src/components/Detail';
+import FilmDetail from './src/containers/Detail';
 
 const Stack = createStackNavigator();
 
@@ -19,12 +19,11 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Recherche" component={SearchNav} />
-            <Stack.Screen name="Detail du film" component={FilmDetail} />
+            <Stack.Screen name="Details" component={FilmDetail} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
     </Provider>
-
   );
 }
 

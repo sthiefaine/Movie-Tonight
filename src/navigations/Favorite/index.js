@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
 import { createStackNavigator } from '@react-navigation/stack';
 
-import List from '../../containers/List';
+import ListFavorite from '../../containers/List/Favorite';
 import FilmDetail from '../../containers/Detail';
-
 
 const Stack = createStackNavigator();
 
@@ -17,7 +15,7 @@ function FavoriteNav() {
       >
         <Stack.Screen 
           name="FavList" 
-          component={List} 
+          component={ListFavorite} 
           options={{ title: 'Mes Favoris' }}
         />
         <Stack.Screen 

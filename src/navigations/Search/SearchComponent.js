@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
 
 import Search from '../../containers/Search'
-import List from '../../containers/List';
+import ListSearch from '../../containers/List/Search';
 
 const SearchComponent = () => {
   return (
     <>
       <Search/>
-      <List/>
+      <ListSearch/>
     </>
   );
 }

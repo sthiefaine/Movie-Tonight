@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 
-import List from '../../components/Lists/Search';
+import ListSearch from '../../../components/Lists/Search';
 
 import { 
     getMoviesSearch,
-} from '../../actions/movie';
+} from '../../../actions/movie';
 
 import { 
     toggleFavorite,
-} from '../../actions/favorite';
+} from '../../../actions/favorite';
 
 const mapStateToProps = (state) => ({
     moviesSearchResults: state.movie.moviesSearchResults,
@@ -24,4 +24,4 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(ListSearch);

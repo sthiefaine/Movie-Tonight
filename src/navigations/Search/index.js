@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
 import { createStackNavigator } from '@react-navigation/stack';
+
 import SearchComponent from './SearchComponent';
 import FilmDetail from '../../containers/Detail';
 

@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { StyleSheet, SafeAreaView, FlatList, Text} from 'react-native'
+import { useRoute } from '@react-navigation/native';
 
 import Cards from '../Cards'
 
@@ -9,6 +10,10 @@ const List = ({
     favoriteMovies,
     toggleFavorite,
 }) => {
+
+    const route = useRoute();
+
+    const moviesList = route.name === 'FavList' ? favoriteMovies : moviesSearchResults.moviesList;
 
     const paginationValue = moviesSearchResults.moviesActualPage; 
     const paginationNextValue = paginationValue + 1;
@@ -25,19 +30,21 @@ const List = ({
         }
     }
 
+
+
     return (
         <>
             {moviesSearchResults?.moviesNbResults && (
                 <SafeAreaView style={styles.list_container}>
                     <FlatList
-                    data={moviesSearchResults.moviesList}
+                    data={moviesList}
                     extraData={
                         favoriteMovies,
                         toggleFavorite
                     }
                     keyExtractor={item => item.id.toString()}
                     renderItem={
-                        ({item}) => <Cards 
+                        ({item}) => <Cards
                             movieInfo={item} 
                             favoriteMovies={favoriteMovies}
                             toggleFavorite={toggleFavorite}

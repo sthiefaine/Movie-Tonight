@@ -9,7 +9,8 @@ import {
   const favorite = (state = initialState, action = {}) => {
     switch (action.type) {
         case TOGGLE_FAVORITE: {
-          const favoriteFilmIndex = state.favoriteMovies.findIndex(item => item === action.value)
+          console.log('REDUCER TOGGLE_FAVORITE');
+          const favoriteFilmIndex = state.favoriteMovies.findIndex(item => item.id === action.value.id)
           if (favoriteFilmIndex !== -1) {
             return {
               ...state,

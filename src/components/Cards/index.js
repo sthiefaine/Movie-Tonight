@@ -1,12 +1,13 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { getImageFromApi } from '../../services/TMDBApi'
 
 import { HeartIcon } from '../../selectors/icons';
 
 import moment from 'moment';
+
 const Cards = ({
   movieInfo, 
   favoriteMovies,
@@ -14,14 +15,16 @@ const Cards = ({
 }) => {
 
   const navigation = useNavigation();
+  const route = useRoute();
 
   const handleOnPressDetailForMovie = (movieId)  => {
     console.log('handleOnPressDetailForFilm', movieId)
+    const routeName = route.name === 'FavList' ? 'FavDetails' : 'SearchDetails';
     /**
      * @param : route Name
      * @param2: Object into params
      */
-    navigation.navigate('Details', {
+    navigation.navigate(routeName, {
       movieId: movieId,
     }); 
   }
@@ -30,25 +33,27 @@ const Cards = ({
     const size = '20';
     var colorFill = 'none';
     var stroke = 'blue';
-    if (favoriteMovies.findIndex(item => item === movieInfo.id) !== -1) {
+
+    if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
       // Film dans nos favoris
       colorFill = 'red';
       stroke = 'red';
     }
+
     return (
       <View>
-      <HeartIcon 
-      colorFill={colorFill} 
-      stroke={stroke}
-      size={size}
-      />
+        <HeartIcon 
+        colorFill={colorFill} 
+        stroke={stroke}
+        size={size}
+        />
       </View>
     )
   }
 
   const handleOnPressToggleFavorite = () => {
-    console.log('handleOnPressToggleFavorite Cards', movieInfo)
-   toggleFavorite(movieInfo.id); 
+    console.log('handleOnPressToggleFavorite Cards', movieInfo?.id)
+   toggleFavorite(movieInfo); 
   }
 
     return (
@@ -61,14 +66,20 @@ const Cards = ({
                 source={{uri: getImageFromApi(movieInfo.poster_path)}}
             />
             <View style={styles.content_container}>
+
                 <View style={styles.header_container}>
-                
                     <Text style={styles.title_text}>{movieInfo.title}</Text>
                     <Text style={styles.vote_text}>{movieInfo.vote_average}</Text>
                 </View>
+
                 <View style={styles.description_container}>
-                    <Text style={styles.description_text} numberOfLines={6}>{movieInfo.overview}</Text>
-                {/* La propriété numberOfLines permet de couper un texte si celui-ci est trop long, il suffit de définir un nombre maximum de ligne */}
+                    <Text 
+                      style={styles.description_text} 
+                      numberOfLines={6}
+                    >
+                      {movieInfo.overview}
+                    </Text>
+                {/* La propriété numberOfLines permet de couper un texte */}
                 </View>
                 <View style={styles.date_container}>
                 <Text style={styles.date_text}>{moment(new Date(movieInfo.release_date)).format('DD/MM/YYYY')}</Text>

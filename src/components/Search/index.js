@@ -10,10 +10,7 @@ const Search = (
     moviesSearchValue,
   }) => {
 
-
-
   const handleOnChangeSearchMoviesValue = (id, text) => {
-    console.log('handleOnClickSearchMovies', id, text)
     setMoviesSearchValue(id, text);
   }
 
@@ -24,20 +21,18 @@ const Search = (
     getMoviesSearch(1);
   }
 
-
-
     return (
-        <View>
-            <TextInput 
-              id='searchMovie'
-              style={styles.textinput} 
-              placeholder='Titre du film' 
-              value={moviesSearchValue}
-              onChangeText={(text) => handleOnChangeSearchMoviesValue('searchMovie', text)}
-              onSubmitEditing={() => handleOnClickSearchMovies()}
-            />
-            <Button title='Rechercher' onPress={() => handleOnClickSearchMovies()}/>
-        </View>
+      <View>
+          <TextInput 
+            id='searchMovie'
+            style={styles.textinput} 
+            placeholder='Titre du film' 
+            value={moviesSearchValue}
+            onChangeText={(text) => handleOnChangeSearchMoviesValue('searchMovie', text)}
+            onSubmitEditing={() => handleOnClickSearchMovies()}
+          />
+          <Button title='Rechercher' onPress={() => handleOnClickSearchMovies()}/>
+      </View>
     )
 }
 

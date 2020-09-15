@@ -21,7 +21,7 @@ const movies = (store) => (next) => (action) => {
 
         api.get('&query=' + searchMovie + '&page=' + paginationValue)
           .then((response) => {
-            console.log('Middleware GET_MOVIES_SEARCH response', response.data);
+            console.log('Middleware GET_MOVIES_SEARCH response');
   
             store.dispatch(saveMoviesSearchList(response.data));
 
@@ -39,7 +39,7 @@ const movies = (store) => (next) => (action) => {
 
         apiMovie.get('movie/' + movieId + '?api_key=' + API_TOKEN + '&language=fr-FR')
           .then((response) => {
-            console.log('Middleware GET_MOVIE_INFO response', response.data);
+            console.log('Middleware GET_MOVIE_INFO response');
 
             store.dispatch(saveMovieInfo(response.data));
 

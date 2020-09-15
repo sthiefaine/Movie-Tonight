@@ -26,25 +26,23 @@ const FilmDetail = ({
   toggleFavorite,
 }) => {
 
-
   const navigation = useNavigation();
   const route = useRoute();
 
   useEffect(() => {
-    getMovieInfo(route.params.movieId)
-    console.log('toto', favoriteMovies)
+    getMovieInfo(route.params?.movieId)
   }, [])
 
   const handleOnPressToggleFavorite = () => {
-    console.log('handleOnPressToggleFavorite', movieInfo)
-   toggleFavorite(movieInfo.id); 
+    console.log('handleOnPressToggleFavorite', movieInfo?.id)
+   toggleFavorite(movieInfo); 
   }
 
 const displayFavoriteImage = () => {
   const size = '40';
   var colorFill = 'none';
   var stroke = 'blue';
-  if (favoriteMovies.findIndex(item => item === movieInfo.id) !== -1) {
+  if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
     // Film dans nos favoris
     colorFill = 'red';
     stroke = 'red';

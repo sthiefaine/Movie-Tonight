@@ -1,67 +1,99 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { 
   StyleSheet, 
   View, 
   Text, 
-  ActivityIndicator, 
   ScrollView, 
-  Image, 
-  Button, 
+  Image,
   TouchableOpacity,
-  ImageBackground,
-} from 'react-native'
-import { useNavigation, useRoute } from '@react-navigation/native';
+  Share,
+  Platform,
+  Button,
+} from 'react-native';
+
+import { useRoute, useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import numeral from 'numeral';
 
 import { getImageFromApi } from '../../services/TMDBApi';
 
-import { HeartIcon } from '../../selectors/icons';
+import { HeartIcon, ShareIconIOS, ShareIconAndroid } from '../../icons/icons';
 
 const FilmDetail = ({
-  moviesSearchResults,
   movieInfo,
   getMovieInfo,
   favoriteMovies,
   toggleFavorite,
 }) => {
 
-  const navigation = useNavigation();
   const route = useRoute();
+  const navigation = useNavigation();
 
   useEffect(() => {
     getMovieInfo(route.params?.movieId)
   }, [])
+
+  const handleShareMovie = () => {
+    console.log('handleShareMovie')
+    Share.share({  
+      message: `L'application MovieTonight te propose de regarder ${movieInfo?.title}.
+      Le film à une note de ${movieInfo?.vote_average} / 10.
+      Genre(s) ${movieInfo?.genres.map(function(genre){
+        return genre.name;
+      }).join(" / ")}.`,
+    })
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => { 
+
+        const headerShareIcon = movieInfo != undefined && Platform.OS === 'ios' 
+        ? <ShareIconIOS />
+        : <ShareIconAndroid />
+
+
+        return(
+          <TouchableOpacity
+            style={styles.share_touchable_headerrightbutton}
+            onPress={() => handleShareMovie()}
+            color="red"
+          >{headerShareIcon}</TouchableOpacity>
+        )
+      },
+    });
+  }, [navigation]);
 
   const handleOnPressToggleFavorite = () => {
     console.log('handleOnPressToggleFavorite', movieInfo?.id)
    toggleFavorite(movieInfo); 
   }
 
-const displayFavoriteImage = () => {
-  const size = '40';
-  var colorFill = 'none';
-  var stroke = 'blue';
-  if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
-    // Film dans nos favoris
-    colorFill = 'red';
-    stroke = 'red';
+  const displayFavoriteImage = () => {
+    const size = '40';
+    var colorFill = 'none';
+    var stroke = 'blue';
+    if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
+      // Film dans nos favoris
+      colorFill = 'red';
+      stroke = 'red';
+    }
+    return (
+      <View>
+      <HeartIcon 
+      colorFill={colorFill} 
+      stroke={stroke}
+      size={size}
+      />
+      </View>
+    )
   }
-  return (
-    <View>
-    <HeartIcon 
-    colorFill={colorFill} 
-    stroke={stroke}
-    size={size}
-    />
-    </View>
-  )
-}
 
     return (
       <>
         {movieInfo != '' && (
           <ScrollView style={styles.scrollview_container}>
+      
             <Image
               style={styles.image}
               source={{uri: getImageFromApi(movieInfo.backdrop_path)}}
@@ -86,6 +118,7 @@ const displayFavoriteImage = () => {
               }).join(" / ")}
             </Text>
           </ScrollView>
+         
       )}
       </>
     )
@@ -136,7 +169,17 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
-  }
+  },
+  share_touchable_headerrightbutton: {
+    margin: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: 'black',
+    elevation: 8,
+    backgroundColor: "lightgrey",
+    padding: 16,
+    borderRadius: 10,
+  },
 })
 
 export default FilmDetail;

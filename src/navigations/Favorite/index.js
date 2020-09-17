@@ -20,8 +20,10 @@ function FavoriteNav() {
         />
         <Stack.Screen 
           name="FavDetails" 
-          component={FilmDetail} 
-          options={{ title: 'Détail du film favori' }}
+          component={FilmDetail}
+          options={{
+          headerTitle: 'Detail',
+        }}
         />
       </Stack.Navigator>
   );

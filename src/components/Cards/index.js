@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { getImageFromApi } from '../../services/TMDBApi'
 
-import { HeartIcon } from '../../selectors/icons';
+import { HeartIcon } from '../../icons/icons';
 
 import moment from 'moment';
 
@@ -82,13 +82,13 @@ const Cards = ({
                 {/* La propriété numberOfLines permet de couper un texte */}
                 </View>
                 <View style={styles.date_container}>
-                <Text style={styles.date_text}>{moment(new Date(movieInfo.release_date)).format('DD/MM/YYYY')}</Text>
-                <TouchableOpacity
-                  style={styles.favorite_container}
-                  onPress={() => handleOnPressToggleFavorite()}
-                >
-                  {displayFavoriteImage()}
-                </TouchableOpacity>
+                  <Text style={styles.date_text}>{moment(new Date(movieInfo.release_date)).format('DD/MM/YYYY')}</Text>
+                  <TouchableOpacity
+                    style={styles.favorite_container}
+                    onPress={() => handleOnPressToggleFavorite()}
+                  >
+                    {displayFavoriteImage()}
+                  </TouchableOpacity>
                 </View>
             </View>
         </TouchableOpacity>
@@ -98,7 +98,7 @@ const Cards = ({
 const styles = StyleSheet.create({
     main_container: {
         height: 190,
-        flexDirection: 'row-reverse'
+        flexDirection: 'row'
       },
       image: {
         width: 120,
@@ -112,13 +112,13 @@ const styles = StyleSheet.create({
       },
       header_container: {
         flex: 3,
-        flexDirection: 'row-reverse'
+        flexDirection: 'row'
       },
       title_text: {
         fontWeight: 'bold',
         fontSize: 20,
         flex: 1,
-        flexWrap: 'wrap-reverse',
+        flexWrap: 'wrap',
         paddingRight: 5
       },
       vote_text: {
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
         color: '#666666'
       },
       date_container: {
-        flexDirection: 'row-reverse',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
       },
       date_text: {
         textAlign: 'right',
         fontSize: 14
       },
       favorite_container: {
-        flex: 1,
       },
   })
 

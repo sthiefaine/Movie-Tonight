@@ -13,7 +13,6 @@ const ListFavorite = ({
     return (
         <>
             {moviesList?.length >= 1 && (
-                <SafeAreaView style={styles.list_container}>
                     <FlatList
                     data={moviesList}
                     extraData={
@@ -29,16 +28,10 @@ const ListFavorite = ({
                         />
                     }
                     />
-                </SafeAreaView>
             )}
         </>
     )
 }
 
-const styles = StyleSheet.create({
-    list_container: {
-      flex: 1
-    },
-});
 
 export default ListFavorite;

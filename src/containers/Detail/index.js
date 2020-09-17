@@ -11,7 +11,6 @@ import {
 } from '../../actions/favorite';
 
 const mapStateToProps = (state) => ({
-    moviesSearchResults: state.movie.moviesSearchResults,
     movieInfo: state.movie.movieInfo,
     favoriteMovies: state.favorite.favoriteMovies,
 });

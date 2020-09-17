@@ -28,12 +28,9 @@ const ListSearch = ({
         }
     }
 
-
-
     return (
         <>
             {moviesSearchResults?.moviesNbResults && (
-                <SafeAreaView style={styles.list_container}>
                     <FlatList
                     data={moviesList}
                     extraData={
@@ -51,16 +48,9 @@ const ListSearch = ({
                     onEndReachedThreshold={0.5}
                     onEndReached={handleOnScrollSearchMovies}
                     />
-                </SafeAreaView>
             )}
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    list_container: {
-      flex: 1
-    },
-});
 
 export default ListSearch;

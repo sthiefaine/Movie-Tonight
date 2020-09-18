@@ -15,7 +15,7 @@ import {
     movieUpComing: [],
   };
   
-  const movie = (state = initialState, action = {}) => {
+  const category = (state = initialState, action = {}) => {
     switch (action.type) {
         case SET_MOVIES_SEARCH_VALUE:
           return {
@@ -61,5 +61,5 @@ import {
     }
   };
   
-  export default movie;
+  export default category;
   

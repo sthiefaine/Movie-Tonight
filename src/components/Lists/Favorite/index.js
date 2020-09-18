@@ -1,14 +1,17 @@
-import React from 'react'
-import { StyleSheet, SafeAreaView, FlatList} from 'react-native'
+import React, {useState} from 'react';
+import { StyleSheet, SafeAreaView, FlatList} from 'react-native';
 
-import Cards from '../../Cards'
+import Cards from '../../Cards';
+import FadeIn from '../../../animations/fadeIn';
+
+import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
 
 const ListFavorite = ({
     favoriteMovies,
     toggleFavorite,
 }) => {
 
-    const moviesList = favoriteMovies;
+    const moviesList = favoriteMovies.reverse();
 
     return (
         <>
@@ -21,11 +24,11 @@ const ListFavorite = ({
                     }
                     keyExtractor={item => item.id.toString()}
                     renderItem={
-                        ({item}) => <Cards
+                        ({item}) => <FadeIn><Cards
                             movieInfo={item} 
                             favoriteMovies={favoriteMovies}
                             toggleFavorite={toggleFavorite}
-                        />
+                        /></FadeIn>
                     }
                     />
             )}

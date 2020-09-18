@@ -76,3 +76,84 @@ export const ShareIconIOS= ({}) => (
 
 
 
+export const HomeIcon = ({
+  stroke,
+  size,
+}) => (
+  <Svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke={stroke}
+  fill="none"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <Path d="M0 0h24v24H0z" stroke="none" />
+  <Path d="M5 12H3l9-9 9 9h-2M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+  <Path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6" />
+</Svg>
+)
+
+export const ListIcon = ({
+  stroke,
+  size,
+}) => (
+  <Svg
+  className="prefix__icon prefix__icon-tabler prefix__icon-tabler-list"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke={stroke}
+  fill="none"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <Path d="M0 0h24v24H0z" stroke="none" />
+  <Path d="M9 6h11M9 12h11M9 18h11M5 6v.01M5 12v.01M5 18v.01" />
+</Svg>
+)
+
+export const HistoryIcon = ({
+  stroke,
+  size,
+}) => (
+  <Svg
+  className="prefix__icon prefix__icon-tabler prefix__icon-tabler-history"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke={stroke}
+  fill="none"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <Path d="M0 0h24v24H0z" stroke="none" />
+  <Path d="M12 8v4l2 2" />
+  <Path d="M3.05 11a9 9 0 11.5 4m-.5 5v-5h5" />
+</Svg>
+)
+
+export const EyeIcon = ({
+  stroke,
+  size,
+}) => (
+  <Svg
+  className="prefix__icon prefix__icon-tabler prefix__icon-tabler-eye"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke={stroke}
+  fill="none"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <Path d="M0 0h24v24H0z" stroke="none" />
+  <Circle cx={12} cy={12} r={2} />
+  <Path d="M2 12l1.5 2a11 11 0 0017 0l1.5-2M2 12l1.5-2a11 11 0 0117 0l1.5 2" />
+</Svg>
+)

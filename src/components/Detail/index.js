@@ -74,7 +74,7 @@ const FilmDetail = ({
     var colorFill = 'none';
     var stroke = 'blue';
     if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
-      // Film dans nos favoris
+
       colorFill = 'red';
       stroke = 'red';
     }
@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: 'black',
-    elevation: 8,
-    backgroundColor: "lightgrey",
+    elevation: 20,
+    backgroundColor: "white",
     padding: 16,
     borderRadius: 10,
   },

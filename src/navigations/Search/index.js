@@ -11,12 +11,11 @@ function SearchNav() {
   return (
 
       <Stack.Navigator
-        initialRouteName="SearchRecherche"
       >
         <Stack.Screen 
           name="SearchRecherche" 
           component={SearchComponent} 
-          options={{ title: 'Recherche' }}
+          options={{ title: 'Rechercher un film' }}
         />
         <Stack.Screen 
           name="SearchDetails" 

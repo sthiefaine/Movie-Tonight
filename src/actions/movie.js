@@ -6,6 +6,9 @@ export const CLEAN_MOVIES_SEARCH = 'CLEAN_MOVIES_SEARCH';
 export const GET_MOVIE_INFO = 'GET_MOVIE_INFO';
 export const SAVE_MOVIE_INFO = 'SAVE_MOVIE_INFO';
 
+export const GET_MOVIE_UPCOMING ='GET_MOVIE_UPCOMING';
+export const SAVE_MOVIE_UPCOMING = 'SAVE_MOVIE_UPCOMING';
+
 export const setMoviesSearchValue = (id, value) => ({
     type: SET_MOVIES_SEARCH_VALUE,
     id,
@@ -33,5 +36,14 @@ export const getMovieInfo = (movieId) => ({
 
 export const saveMovieInfo = (value) => ({
     type: SAVE_MOVIE_INFO,
+    value,
+})
+
+export const getMovieUpComing = () => ({
+    type: GET_MOVIE_UPCOMING,
+})
+
+export const saveMovieUpComing = (value) => ({
+    type: SAVE_MOVIE_UPCOMING,
     value,
 })

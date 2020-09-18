@@ -3,10 +3,18 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import HomeNav from './Home';
 import SearchNav from './Search';
 import FavoriteNav from './Favorite';
+import WatchedNav from './Watched';
 
-import { SearchIcon, HeartIcon } from '../icons/icons';
+import { 
+  SearchIcon, 
+  HeartIcon,
+  HomeIcon,
+  ListIcon,
+  EyeIcon,
+} from '../icons/icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,9 +35,22 @@ export default function Navigation({
 
               tabBarIcon: ({ focused }) => {
                 
-                if (route.name === 'TabRecherche') {
+                if (route.name === 'TabHome') {
                   const stroke = focused
                     ? 'red'
+                    : 'black';
+
+                    return (
+                      <HomeIcon
+                        stroke={stroke}
+                        size='30'   
+                      />
+                    )
+                } 
+
+                if (route.name === 'TabRecherche') {
+                  const stroke = focused
+                    ? 'blue'
                     : 'black';
 
                     return (
@@ -38,7 +59,9 @@ export default function Navigation({
                         size='30'   
                       />
                     )
-                } else if (route.name === 'TabFavorite') {
+                } 
+
+                if (route.name === 'TabFavorite') {
                   const colorFill = focused 
                   ? 'red' 
                   : 'none';
@@ -52,15 +75,37 @@ export default function Navigation({
                     />
                   )
                 }
+
+                if (route.name === 'TabWatched') {
+                  const stroke = focused 
+                  ? 'green' 
+                  : 'black';
+
+                  return (
+                    <EyeIcon 
+                      stroke={stroke}
+                      size='30' 
+                    />
+                  )
+                }
+
               },
 
             })}
             tabBarOptions={{
               keyboardHidesTabBar: true
             }}
-            initialRouteName="TabRecherche"
+            initialRouteName="TabHome"
           
           >
+            <Tab.Screen 
+              name="TabHome" 
+              component={HomeNav} 
+              options={{ 
+                title: 'Accueil',
+              }}
+            />
+
             <Tab.Screen 
               name="TabRecherche" 
               component={SearchNav} 
@@ -77,6 +122,14 @@ export default function Navigation({
                 [favoriteTabBarBadge]: `${favoriteMoviesNb}`, 
               }}
             /> 
+
+            <Tab.Screen 
+              name="TabWatched" 
+              component={WatchedNav} 
+              options={{ 
+                title: 'Déja Vu',
+              }}
+            />
 
           </Tab.Navigator>
         </NavigationContainer>

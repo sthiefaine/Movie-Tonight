@@ -11,7 +11,7 @@ function FavoriteNav() {
   return (
 
       <Stack.Navigator
-        initialRouteName="FavList"
+        
       >
         <Stack.Screen 
           name="FavList" 
@@ -22,7 +22,7 @@ function FavoriteNav() {
           name="FavDetails" 
           component={FilmDetail}
           options={{
-          headerTitle: 'Detail',
+          title: 'Détail',
         }}
         />
       </Stack.Navigator>

@@ -1,8 +1,9 @@
-import React from 'react'
-import { StyleSheet, SafeAreaView, FlatList, Text} from 'react-native'
-import { useRoute } from '@react-navigation/native';
+import React, {useState} from 'react';
+import { StyleSheet, SafeAreaView, FlatList, Text, View} from 'react-native';
 
-import Cards from '../../Cards'
+import Cards from '../../Cards';
+import FadeIn from '../../../animations/fadeIn';
+
 
 const ListSearch = ({
     getMoviesSearch, 
@@ -10,7 +11,7 @@ const ListSearch = ({
     favoriteMovies,
     toggleFavorite,
 }) => {
-
+   
     const moviesList = moviesSearchResults.moviesList;
 
     const paginationValue = moviesSearchResults.moviesActualPage; 
@@ -28,6 +29,7 @@ const ListSearch = ({
         }
     }
 
+
     return (
         <>
             {moviesSearchResults?.moviesNbResults && (
@@ -39,11 +41,24 @@ const ListSearch = ({
                     }
                     keyExtractor={item => item.id.toString()}
                     renderItem={
-                        ({item}) => <Cards
-                            movieInfo={item} 
-                            favoriteMovies={favoriteMovies}
-                            toggleFavorite={toggleFavorite}
-                        />
+                        ({item}) => {
+
+                            return (
+                                <>
+                                    {item?.overview.length !==0 && (
+
+                                    
+                                        <FadeIn>
+                                            <Cards
+                                                movieInfo={item} 
+                                                favoriteMovies={favoriteMovies}
+                                                toggleFavorite={toggleFavorite}
+                                            />
+                                        </FadeIn>
+                                    )}
+                                </>
+                            )
+                        }
                     }
                     onEndReachedThreshold={0.5}
                     onEndReached={handleOnScrollSearchMovies}

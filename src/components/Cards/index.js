@@ -4,9 +4,12 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { getImageFromApi } from '../../services/TMDBApi'
 
-import { HeartIcon, EyeIcon } from '../../icons/icons';
-
-import FadeIn from '../../animations/fadeIn'
+import { 
+  HeartIcon, 
+  EyeIcon,
+  PlusIcon,
+  CheckIcon,
+} from '../../icons/icons';
 
 import moment from 'moment';
 
@@ -14,6 +17,10 @@ const Cards = ({
   movieInfo, 
   favoriteMovies,
   toggleFavorite,
+  watchedMovies,
+  toggleWatched,
+  toggleWantToWatch,
+  wantToWatchMovies,
 }) => {
 
   const navigation = useNavigation();
@@ -21,7 +28,9 @@ const Cards = ({
 
   const handleOnPressDetailForMovie = (movieId)  => {
     console.log('handleOnPressDetailForFilm', movieId)
-    const routeName = route.name === 'FavList' ? 'FavDetails' : 'SearchDetails';
+    const routeName = route.name === 'SearchRecherche' ? 'SearchDetails': 'FilmDetails';
+
+
     /**
      * @param : route Name
      * @param2: Object into params
@@ -37,41 +46,68 @@ const Cards = ({
     var stroke = 'blue';
 
     if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
-      // Film dans nos favoris
-      colorFill = 'red';
+      colorFill = 'green';
       stroke = 'red';
     }
 
     return (
-      <View>
+    
         <HeartIcon 
         colorFill={colorFill} 
         stroke={stroke}
         size={size}
         />
-      </View>
+    
     )
   }
 
   const displayWatchedImage = () => {
     const size = '30';
     var colorFill = 'none';
-    var stroke = 'blue';
+    var stroke = 'red';
 
-    if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
-      // Film dans nos favoris
+    if (watchedMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
       colorFill = 'green';
       stroke = 'green';
     }
 
     return (
-      <View>
+    
         <EyeIcon
         colorFill={colorFill} 
         stroke={stroke}
         size={size}
         />
-      </View>
+    
+    )
+  }
+
+  const displayWantToWatchImage = () => {
+    const size = '30';
+    var stroke = 'blue';
+
+    if (wantToWatchMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
+
+
+      stroke = 'green';
+      return (
+     
+        <CheckIcon
+        stroke={stroke}
+        size={size}
+        />
+    
+      )
+
+    }
+
+    return (
+   
+        <PlusIcon
+        stroke={stroke}
+        size={size}
+        />
+   
     )
   }
 
@@ -81,6 +117,15 @@ const Cards = ({
     toggleFavorite(movieInfo); 
   }
 
+  const handleOnPressToggleWatched = () => {
+    console.log('handleOnPressToggleWatched Cards', movieInfo?.id)
+    toggleWatched(movieInfo); 
+  }
+
+  const handleOnPressToggleWantToWatch = () => {
+    console.log('handleOnPressToggleWantToWatch Cards', movieInfo?.id)
+    toggleWantToWatch(movieInfo); 
+  }
 
     return (
 
@@ -110,19 +155,35 @@ const Cards = ({
                     </Text>
                 </View>
                 <View style={styles.date_container}>
-                <Text style={styles.vote_text}>{movieInfo.vote_average}</Text>
+
+                  <Text style={styles.vote_text}>{movieInfo.vote_average}</Text>
+
+                  <View style={styles.userActions}>
+
                   <TouchableOpacity
-                    style={styles.favorite_container}
-                    onPress={() => handleOnPressToggleFavorite()}
-                  >
-                    {displayFavoriteImage()}
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.favorite_container}
-                    onPress={() => handleOnPressToggleFavorite()}
-                  >
-                    {displayWatchedImage()}
-                  </TouchableOpacity>
+                    style={styles.icons}
+                      onPress={() => handleOnPressToggleWantToWatch()}
+                    >
+                      {displayWantToWatchImage()}
+                    </TouchableOpacity>
+
+                    
+                    <TouchableOpacity
+                      style={styles.icons}
+                      onPress={() => handleOnPressToggleFavorite()}
+                    >
+                      {displayFavoriteImage()}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                    style={styles.icons}
+                      onPress={() => handleOnPressToggleWatched()}
+                    >
+                      {displayWatchedImage()}
+                    </TouchableOpacity>
+
+                  </View>
+
                 </View>
             </View>
         </TouchableOpacity>
@@ -180,9 +241,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
       },
-
-      favorite_container: {
+      userActions: {
+        flexGrow: 2,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
       },
+      icons: {
+        marginLeft: 20,
+      }
   })
 
 export default Cards;

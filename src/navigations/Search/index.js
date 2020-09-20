@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import SearchComponent from './SearchComponent';
+import SearchScreen from './SearchScreen';
 import FilmDetail from '../../containers/Detail';
 
 const Stack = createStackNavigator();
@@ -14,7 +14,7 @@ function SearchNav() {
       >
         <Stack.Screen 
           name="SearchRecherche" 
-          component={SearchComponent} 
+          component={SearchScreen} 
           options={{ title: 'Rechercher un film' }}
         />
         <Stack.Screen 

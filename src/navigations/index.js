@@ -5,33 +5,26 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeNav from './Home';
 import SearchNav from './Search';
-import FavoriteNav from './Favorite';
-import WatchedNav from './Watched';
+import ListsNav from './Lists';
 
 import { 
   SearchIcon, 
-  HeartIcon,
   HomeIcon,
   ListIcon,
-  EyeIcon,
 } from '../icons/icons';
 
 const Tab = createBottomTabNavigator();
 
-export default function Navigation({
-  favoriteMoviesNb
-}) {
-
-  const favoriteTabBarBadge = favoriteMoviesNb >= 1 
-  ? 'tabBarBadge'
-  : ''
-
-
+export default function Navigation() {
 
   return (
         <NavigationContainer>
           <Tab.Navigator
-            screenOptions={({ route, focused }) => ({
+            shifting={true}
+            activeColor="black"
+            inactiveColor="grey"
+            screenOptions={(
+              { route }) => ({
 
               tabBarIcon: ({ focused }) => {
                 
@@ -61,28 +54,13 @@ export default function Navigation({
                     )
                 } 
 
-                if (route.name === 'TabFavorite') {
-                  const colorFill = focused 
-                  ? 'red' 
-                  : 'none';
-
-                  return (
-                    <HeartIcon 
-
-                      colorFill={colorFill} 
-                      stroke='black'
-                      size='30' 
-                    />
-                  )
-                }
-
-                if (route.name === 'TabWatched') {
+                if (route.name === 'TabLists') {
                   const stroke = focused 
                   ? 'green' 
                   : 'black';
 
                   return (
-                    <EyeIcon 
+                    <ListIcon 
                       stroke={stroke}
                       size='30' 
                     />
@@ -103,6 +81,7 @@ export default function Navigation({
               component={HomeNav} 
               options={{ 
                 title: 'Accueil',
+                tabBarColor: '#FF000010',
               }}
             />
 
@@ -111,23 +90,16 @@ export default function Navigation({
               component={SearchNav} 
               options={{ 
                 title: 'Recherche',
+                tabBarColor: '#0000FF10',
               }}
             />
 
             <Tab.Screen 
-              name="TabFavorite" 
-              component={FavoriteNav} 
+              name="TabLists" 
+              component={ListsNav} 
               options={{ 
-                title: 'Favoris',
-                [favoriteTabBarBadge]: `${favoriteMoviesNb}`, 
-              }}
-            /> 
-
-            <Tab.Screen 
-              name="TabWatched" 
-              component={WatchedNav} 
-              options={{ 
-                title: 'Déja Vu',
+                title: 'Listes',
+                tabBarColor: '#00800010',
               }}
             />
 

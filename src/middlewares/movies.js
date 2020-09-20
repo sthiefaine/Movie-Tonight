@@ -54,14 +54,12 @@ const movies = (store) => (next) => (action) => {
     case GET_MOVIE_UPCOMING: {
       console.log('Middleware UPCOMING');
 
-      const movieId = action.movieId;
-
       apiMovie.get('movie/upcoming?api_key=' + API_TOKEN + '&language=fr-FR')
         .then((response) => {
           console.log('Middleware UPCOMING response');
 
           store.dispatch(saveMovieUpComing(response.data));
-          
+
         })
         .catch((error) => {
           console.log('Une erreur est survenue', error);

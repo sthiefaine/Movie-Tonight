@@ -14,7 +14,7 @@ import {
           if (favoriteFilmIndex !== -1) {
             return {
               ...state,
-              favoriteMovies: state.favoriteMovies.filter( (_item, index) => index !== favoriteFilmIndex)
+              favoriteMovies: state.favoriteMovies.filter( (_item, index) => index !== favoriteFilmIndex).reverse()
             }
           }
           else {

@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import { StyleSheet, SafeAreaView, FlatList, Text, View} from 'react-native';
 
-import Cards from '../../Cards';
-import FadeIn from '../../../animations/fadeIn';
+import Cards from '../Cards';
+import FadeIn from '../../animations/fadeIn';
 
 
-const ListSearch = ({
+const FlatListSearch = ({
     getMoviesSearch, 
     moviesSearchResults,
     favoriteMovies,
     toggleFavorite,
+    watchedMovies,
+    toggleWatched,
+    toggleWantToWatch,
+    wantToWatchMovies,
 }) => {
    
     const moviesList = moviesSearchResults.moviesList;
@@ -37,7 +41,11 @@ const ListSearch = ({
                     data={moviesList}
                     extraData={
                         favoriteMovies,
-                        toggleFavorite
+                        toggleFavorite,
+                        watchedMovies,
+                        toggleWatched,
+                        toggleWantToWatch,
+                        wantToWatchMovies
                     }
                     keyExtractor={item => item.id.toString()}
                     renderItem={
@@ -46,13 +54,15 @@ const ListSearch = ({
                             return (
                                 <>
                                     {item?.overview.length !==0 && (
-
-                                    
                                         <FadeIn>
                                             <Cards
                                                 movieInfo={item} 
                                                 favoriteMovies={favoriteMovies}
                                                 toggleFavorite={toggleFavorite}
+                                                watchedMovies={watchedMovies}
+                                                toggleWatched={toggleWatched}
+                                                toggleWantToWatch={toggleWantToWatch}
+                                                wantToWatchMovies={wantToWatchMovies}
                                             />
                                         </FadeIn>
                                     )}
@@ -68,4 +78,4 @@ const ListSearch = ({
     )
 }
 
-export default ListSearch;
+export default FlatListSearch;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Path, Circle } from "react-native-svg"
+import Svg, { Path, Circle, Line } from "react-native-svg"
 
 export const HeartIcon = ({ 
   colorFill, 
@@ -101,7 +101,6 @@ export const ListIcon = ({
   size,
 }) => (
   <Svg
-  className="prefix__icon prefix__icon-tabler prefix__icon-tabler-list"
   width={size}
   height={size}
   viewBox="0 0 24 24"
@@ -121,7 +120,6 @@ export const HistoryIcon = ({
   size,
 }) => (
   <Svg
-  className="prefix__icon prefix__icon-tabler prefix__icon-tabler-history"
   width={size}
   height={size}
   viewBox="0 0 24 24"
@@ -156,4 +154,43 @@ export const EyeIcon = ({
   <Circle cx={12} cy={12} r={2} />
   <Path d="M2 12l1.5 2a11 11 0 0017 0l1.5-2M2 12l1.5-2a11 11 0 0117 0l1.5 2" />
 </Svg>
+)
+
+export const PlusIcon = ({
+  size,
+  stroke,
+}) => (
+  <Svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke={stroke}
+  fill="none"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <Line x1={12} y1={5} x2={12} y2={19} />
+  <Line x1={5} y1={12} x2={19} y2={12} />
+</Svg>
+)
+
+export const CheckIcon = ({
+  size,
+  stroke,
+})=> (
+    <Svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={stroke}
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <Path d="M5 12l5 5l10 -10" />
+  </Svg>
 )

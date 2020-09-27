@@ -30,8 +30,17 @@ const FilmDetail = ({
   const navigation = useNavigation();
 
   useEffect(() => {
-    getMovieInfo(route.params?.movieId)
+   // getMovieInfo(route.params?.movieId)
+   console.log('ICIIIIIII', movieInfo)
+   console.log('dddddd', route.name)
+   console.log('fffff', favoriteMovies)
   }, [])
+
+
+    const movieInfoCheck = () => {
+
+    }
+
 
   const handleShareMovie = () => {
     console.log('handleShareMovie')
@@ -45,6 +54,7 @@ const FilmDetail = ({
   }
 
   useLayoutEffect(() => {
+
     navigation.setOptions({
       headerRight: () => { 
 
@@ -62,6 +72,7 @@ const FilmDetail = ({
         )
       },
     });
+
   }, [navigation]);
 
   const handleOnPressToggleFavorite = () => {
@@ -91,7 +102,7 @@ const FilmDetail = ({
 
     return (
       <>
-        {movieInfo != '' && (
+        {movieInfo != '' && movieInfo.id === route.params?.movieId && (
           <ScrollView style={styles.scrollview_container}>
       
             <Image
@@ -120,6 +131,13 @@ const FilmDetail = ({
           </ScrollView>
          
       )}
+
+      {movieInfo.id !== route.params?.movieId && (
+        <ScrollView style={styles.scrollview_container}>
+          <Text style={styles.default_text}>TEST</Text>
+        </ScrollView>
+      )}
+
       </>
     )
 }

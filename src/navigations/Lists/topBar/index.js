@@ -6,7 +6,19 @@ const Tab = createMaterialTopTabNavigator();
 
 const ListTopBar = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+        tabBarOptions={{
+            activeTintColor: '#222',
+            tabStyle: {
+                padding: 0, margin:0,   //Padding 0 here
+            },
+            labelStyle: {
+                fontSize: 12,
+            },
+            activeBackgroundColor: 'red',
+            inactiveBackgroundColor: 'blue',
+        }}
+    >
 
       <Tab.Screen 
         name="ListWantToWatch" 

@@ -46,7 +46,7 @@ const Cards = ({
     var stroke = 'blue';
 
     if (favoriteMovies.findIndex(item => item.id === movieInfo.id) !== -1) {
-      colorFill = 'green';
+      colorFill = 'red';
       stroke = 'red';
     }
 
@@ -167,7 +167,7 @@ const Cards = ({
                       {displayWantToWatchImage()}
                     </TouchableOpacity>
 
-                    
+
                     <TouchableOpacity
                       style={styles.icons}
                       onPress={() => handleOnPressToggleFavorite()}
